@@ -1,4 +1,4 @@
-wonszPlot
+QuickChart Python library
 =========
 
-wonszPlot is a lightweight library for drawing graphs and tables with matplotlib.
+QuickChart is a lightweight library for drawing graphs and tables using just (http://www.pythonware.com/products/pil/ "PIL").
