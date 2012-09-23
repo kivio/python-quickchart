@@ -22,7 +22,7 @@ class TestAbstractChart(TestCase):
     def test_save(self):
         self.abstract_plot.save_as_png(self.path)
         self.assertTrue(os.path.isfile(self.path))
-#        os.remove(self.path)
+        os.remove(self.path)
 
 if __name__ == '__main__':
     unittest.main()
