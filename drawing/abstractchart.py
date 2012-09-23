@@ -20,10 +20,11 @@ class AbstractPlot(object):
             AbstractPlot is a class to draw coordinate system
         """
         self._coordinates_thickness = 2
+        self._coordinates_color = Color('#394659')
         self._grid_padding = 20
         self._grid_color = Color('#A5C9FF')
         self._resolution = Resolution(800,600)
-        self._image = Image.new('RGB', tuple(self._resolution), tuple(Color('#fff')))
+        self._image = Image.new('RGBA', tuple(self._resolution), tuple(Color('#fff')))
 
     def get_resolution(self):
         """
@@ -43,9 +44,19 @@ class AbstractPlot(object):
         """
         center = self._get_center()
         draw.line([(center.x,0),(center.x, self._resolution.height)],
-            fill = tuple(Color('#394659')), width = self._coordinates_thickness)
+            fill = tuple(self._coordinates_color), width = self._coordinates_thickness)
         draw.line([(0,center.y),(self._resolution.width, center.y)],
-            fill = tuple(Color('#394659')), width = self._coordinates_thickness)
+            fill = tuple(self._coordinates_color), width = self._coordinates_thickness)
+        # draw arrows
+        # TODO : antialiasing for that
+        p1 = Point(self._resolution.width - 10, center.y - 6)
+        p2 = Point(self._resolution.width, center.y)
+        p3 = Point(self._resolution.width - 10, center.y + 6)
+        draw.polygon((tuple(p1),tuple(p2), tuple(p3)), fill = tuple(self._coordinates_color))
+        p1 = Point(center.x - 6, 10)
+        p2 = Point(center.x, 0)
+        p3 = Point(center.x + 6, 10)
+        draw.polygon((tuple(p1),tuple(p2), tuple(p3)), fill = tuple(self._coordinates_color))
 
     def _draw_grid(self, draw):
         """
